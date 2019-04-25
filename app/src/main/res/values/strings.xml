@@ -4,4 +4,6 @@
     <string name="continue_game_button_text">继续游戏</string>
     <string name="diy_button_text">自定义</string>
     <string name="setting_button_text">设置</string>
+    <string name="built_in_game_tag">内置关卡</string>
+    <string name="diy_game_tag">自定义关卡</string>
 </resources>

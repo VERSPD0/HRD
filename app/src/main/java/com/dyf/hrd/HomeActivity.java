@@ -1,5 +1,6 @@
 package com.dyf.hrd;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,8 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void startGame(View view) {
+        Intent intent = new Intent(this, SelectActivity.class);
+        startActivity(intent);
     }
 
     public void continueGame(View view) {
