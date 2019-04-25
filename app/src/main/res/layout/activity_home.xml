@@ -1,9 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    android:gravity="center"
+    tools:context=".HomeActivity"
+    tools:layout_editor_absoluteY="25dp"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_game_button_text"
+        android:layout_margin="@dimen/homepage_button_margin"
+        android:onClick="startGame"
+        android:textSize="@dimen/homepage_button_text_size"/>
+
+    <Button
+        android:id="@+id/continue_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/continue_game_button_text"
+        android:layout_margin="@dimen/homepage_button_margin"
+        android:onClick="continueGame"
+        android:textSize="@dimen/homepage_button_text_size"/>
+
+
+    <Button
+        android:id="@+id/diy_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/diy_button_text"
+        android:layout_margin="@dimen/homepage_button_margin"
+        android:onClick="diyGame"
+        android:textSize="@dimen/homepage_button_text_size"/>
+
+
+    <Button
+        android:id="@+id/setting_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/setting_button_text"
+        android:layout_margin="@dimen/homepage_button_margin"
+        android:onClick="settingGame"
+        android:textSize="@dimen/homepage_button_text_size"/>
+</LinearLayout>
