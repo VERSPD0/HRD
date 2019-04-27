@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DIYActivity">
+
+    <Button
+        android:id="@+id/game_box"
+        android:layout_width="@dimen/box_width"
+        android:layout_height="@dimen/box_height"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="184dp"
+        android:background="#aa0000"
+        android:clickable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:columnCount="4"
+        android:rowCount="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/game_box">
+
+        <Button
+            android:id="@+id/sample_small_box"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_row="0"
+            android:layout_column="0" />
+
+        <Button
+            android:id="@+id/sample_cue_box"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_row="0"
+            android:layout_column="1" />
+
+        <Button
+            android:id="@+id/sample_vertical_box"
+            android:layout_width="35dp"
+            android:layout_height="70dp"
+            android:layout_row="0"
+            android:layout_column="2" />
+
+        <Button
+            android:id="@+id/sample_horizontal_box"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_row="0"
+            android:layout_column="3" />
+
+    </GridLayout>
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="@string/level_name_hint"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/game_box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/save_diy_button"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/save_button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
+
+</android.support.constraint.ConstraintLayout>
