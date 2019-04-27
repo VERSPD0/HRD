@@ -23,6 +23,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void diyGame(View view) {
+        Intent intent = new Intent(this, DIYActivity.class);
+        startActivity(intent);
     }
 
     public void settingGame(View view) {
