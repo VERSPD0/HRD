@@ -6,4 +6,6 @@
     <string name="setting_button_text">设置</string>
     <string name="built_in_game_tag">内置关卡</string>
     <string name="diy_game_tag">自定义关卡</string>
+    <string name="game_back_button">Back</string>
+    <string name="game_reset_button">Reset</string>
 </resources>

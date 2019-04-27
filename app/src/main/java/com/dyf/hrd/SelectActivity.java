@@ -1,5 +1,6 @@
 package com.dyf.hrd;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,8 +15,10 @@ public class SelectActivity extends AppCompatActivity {
     }
 
     public void selectGame(View view) {
-        int tag = Integer.parseInt(view.getTag().toString());
-        Log.d("fdsfsfsfs", view.getTag().toString());
+        String tag = view.getTag().toString();
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra(GameActivity.GAMEID, tag);
+        startActivity(intent);
     }
 
     public void switchToBuiltin(View view) {
