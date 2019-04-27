@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="BoxStyle">
+        <item name="android:clickable">false</item>
+    </style>
+
 </resources>
