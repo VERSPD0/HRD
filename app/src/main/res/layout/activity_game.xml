@@ -6,103 +6,118 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity">
 
-    <Button
+    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/game_box"
-        android:layout_width="@dimen/box_width"
-        android:layout_height="@dimen/box_height"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="124dp"
-        android:background="#aa0000"
-        android:clickable="false"
+        android:layout_width="240dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:columnCount="4"
+        android:rowCount="5"
+        android:background="#C1C111"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/small_box1"
-        android:layout_width="@dimen/base"
-        android:layout_height="@dimen/base"
-        tools:layout_editor_absoluteX="192dp"
-        tools:layout_editor_absoluteY="143dp" />
+        <Button
+            android:id="@+id/small_box1"
+            style = "@style/BoxStyle"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:layout_width="@dimen/base"
+            android:layout_height="@dimen/base"
+            android:onClick="showXY"
+            />
 
-    <Button
-        android:id="@+id/small_box2"
-        style = "@style/BoxStyle"
-        android:layout_width="@dimen/base"
-        android:layout_height="@dimen/base"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="143dp" />
+        <Button
+            android:id="@+id/small_box2"
+            style = "@style/BoxStyle"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:layout_width="@dimen/base"
+            android:layout_height="@dimen/base"
+            />
 
-    <Button
-        android:id="@+id/small_box3"
-        style = "@style/BoxStyle"
-        android:layout_width="@dimen/base"
-        android:layout_height="@dimen/base"
-        tools:layout_editor_absoluteX="252dp"
-        tools:layout_editor_absoluteY="144dp" />
+        <Button
+            android:id="@+id/small_box3"
+            style = "@style/BoxStyle"
+            android:layout_column="1"
+            android:layout_row="0"
+            android:layout_width="@dimen/base"
+            android:layout_height="@dimen/base"
+            />
 
-    <Button
-        android:id="@+id/small_box4"
-        style = "@style/BoxStyle"
-        android:layout_width="@dimen/base"
-        android:layout_height="@dimen/base"
-        tools:layout_editor_absoluteX="132dp"
-        tools:layout_editor_absoluteY="143dp" />
+        <Button
+            android:id="@+id/small_box4"
+            style = "@style/BoxStyle"
+            android:layout_column="1"
+            android:layout_row="1"
+            android:layout_width="@dimen/base"
+            android:layout_height="@dimen/base"
+            />
 
-    <Button
-        android:id="@+id/cue_box"
-        style = "@style/BoxStyle"
-        android:layout_width="@dimen/double_base"
-        android:layout_height="@dimen/double_base"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.456"
-        tools:layout_editor_absoluteX="192dp" />
+        <Button
+            android:id="@+id/cue_box"
+            style="@style/BoxStyle"
+            android:layout_width="@dimen/double_base"
+            android:layout_height="@dimen/double_base"
+            android:layout_row="0"
+            android:layout_rowSpan="2"
+            android:layout_column="2"
+            android:layout_columnSpan="2" />
 
-    <Button
-        android:id="@+id/h_box"
-        style = "@style/BoxStyle"
-        android:layout_width="@dimen/double_base"
-        android:layout_height="@dimen/base"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="321dp" />
+        <Button
+            android:id="@+id/h_box"
+            style = "@style/BoxStyle"
+            android:layout_column="0"
+            android:layout_row="2"
+            android:layout_columnSpan="2"
+            android:layout_width="@dimen/double_base"
+            android:layout_height="@dimen/base"
+            />
 
-    <Button
-        android:id="@+id/v_box1"
-        style = "@style/BoxStyle"
-        android:layout_width="@dimen/base"
-        android:layout_height="@dimen/double_base"
-        tools:layout_editor_absoluteX="192dp"
-        tools:layout_editor_absoluteY="323dp" />
+        <Button
+            android:id="@+id/v_box1"
+            style = "@style/BoxStyle"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:layout_rowSpan="2"
+            android:layout_width="@dimen/base"
+            android:layout_height="@dimen/double_base"
+            />
 
-    <Button
-        android:id="@+id/v_box2"
-        style = "@style/BoxStyle"
-        android:layout_width="@dimen/base"
-        android:layout_height="@dimen/double_base"
-        tools:layout_editor_absoluteX="252dp"
-        tools:layout_editor_absoluteY="324dp" />
+        <Button
+            android:id="@+id/v_box2"
+            style = "@style/BoxStyle"
+            android:layout_row="2"
+            android:layout_column="3"
+            android:layout_rowSpan="2"
+            android:layout_width="@dimen/base"
+            android:layout_height="@dimen/double_base"
+            />
 
-    <Button
-        android:id="@+id/v_box3"
-        style = "@style/BoxStyle"
-        android:layout_width="@dimen/base"
-        android:layout_height="@dimen/double_base"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.456"
-        tools:layout_editor_absoluteX="132dp" />
+        <Button
+            android:id="@+id/v_box3"
+            style = "@style/BoxStyle"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:layout_rowSpan="2"
+            android:layout_width="@dimen/base"
+            android:layout_height="@dimen/double_base"
+            />
 
-    <Button
-        android:id="@+id/v_box4"
-        style = "@style/BoxStyle"
-        android:layout_width="@dimen/base"
-        android:layout_height="@dimen/double_base"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.454"
-        tools:layout_editor_absoluteX="72dp" />
+        <Button
+            android:id="@+id/v_box4"
+            style = "@style/BoxStyle"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:layout_rowSpan="2"
+            android:layout_width="@dimen/base"
+            android:layout_height="@dimen/double_base"
+            />
+
+    </GridLayout>
 
     <Button
         android:id="@+id/back_button"
