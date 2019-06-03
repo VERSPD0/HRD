@@ -101,12 +101,13 @@
 
 
     <Button
-        android:id="@+id/back_button"
+        android:id="@+id/undo_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/game_back_button"
+        android:text="@string/game_undo_button"
+        android:onClick="undo"
         app:layout_constraintBaseline_toBaselineOf="@+id/reset_button"
         app:layout_constraintEnd_toStartOf="@+id/reset_button"
         app:layout_constraintHorizontal_bias="0.5"
@@ -123,18 +124,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/back_button"
+        app:layout_constraintStart_toEndOf="@+id/undo_button"
         app:layout_constraintTop_toBottomOf="@+id/game_box" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/stepCount"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="3"
+        android:text=""
         android:textAlignment="center"
         android:textSize="50sp"
         android:textStyle="bold"
