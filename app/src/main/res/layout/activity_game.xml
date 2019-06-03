@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GameActivity">
+    tools:context=".GameActivity"
+    android:id="@+id/game_page">
 
     <Button
         android:id="@+id/game_box"
@@ -20,89 +21,84 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/small_box1"
+        android:id="@+id/box1"
         android:layout_width="@dimen/base"
         android:layout_height="@dimen/base"
-        tools:layout_editor_absoluteX="192dp"
-        tools:layout_editor_absoluteY="143dp" />
+        app:layout_constraintLeft_toLeftOf="@id/game_box"
+        app:layout_constraintTop_toTopOf="@id/game_box"/>
 
     <Button
-        android:id="@+id/small_box2"
+        android:id="@+id/box2"
         style = "@style/BoxStyle"
         android:layout_width="@dimen/base"
         android:layout_height="@dimen/base"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="143dp" />
+        app:layout_constraintLeft_toLeftOf="@id/game_box"
+        app:layout_constraintTop_toTopOf="@id/game_box" />
 
     <Button
-        android:id="@+id/small_box3"
+        android:id="@+id/box3"
         style = "@style/BoxStyle"
         android:layout_width="@dimen/base"
         android:layout_height="@dimen/base"
-        tools:layout_editor_absoluteX="252dp"
-        tools:layout_editor_absoluteY="144dp" />
+        app:layout_constraintLeft_toLeftOf="@id/game_box"
+        app:layout_constraintTop_toTopOf="@id/game_box" />
 
     <Button
-        android:id="@+id/small_box4"
+        android:id="@+id/box4"
         style = "@style/BoxStyle"
         android:layout_width="@dimen/base"
         android:layout_height="@dimen/base"
-        tools:layout_editor_absoluteX="132dp"
-        tools:layout_editor_absoluteY="143dp" />
+        app:layout_constraintLeft_toLeftOf="@id/game_box"
+        app:layout_constraintTop_toTopOf="@id/game_box" />
 
     <Button
-        android:id="@+id/cue_box"
+        android:id="@+id/box5"
         style = "@style/BoxStyle"
         android:layout_width="@dimen/double_base"
         android:layout_height="@dimen/double_base"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.456"
-        tools:layout_editor_absoluteX="192dp" />
+        app:layout_constraintLeft_toLeftOf="@id/game_box"
+        app:layout_constraintTop_toTopOf="@id/game_box" />
 
     <Button
-        android:id="@+id/h_box"
+        android:id="@+id/box6"
         style = "@style/BoxStyle"
         android:layout_width="@dimen/double_base"
         android:layout_height="@dimen/base"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="321dp" />
+        app:layout_constraintLeft_toLeftOf="@id/game_box"
+        app:layout_constraintTop_toTopOf="@id/game_box" />
 
     <Button
-        android:id="@+id/v_box1"
+        android:id="@+id/box7"
         style = "@style/BoxStyle"
         android:layout_width="@dimen/base"
         android:layout_height="@dimen/double_base"
-        tools:layout_editor_absoluteX="192dp"
-        tools:layout_editor_absoluteY="323dp" />
+        app:layout_constraintLeft_toLeftOf="@id/game_box"
+        app:layout_constraintTop_toTopOf="@id/game_box" />
 
     <Button
-        android:id="@+id/v_box2"
+        android:id="@+id/box8"
         style = "@style/BoxStyle"
         android:layout_width="@dimen/base"
         android:layout_height="@dimen/double_base"
-        tools:layout_editor_absoluteX="252dp"
-        tools:layout_editor_absoluteY="324dp" />
+        app:layout_constraintLeft_toLeftOf="@id/game_box"
+        app:layout_constraintTop_toTopOf="@id/game_box"/>
 
     <Button
-        android:id="@+id/v_box3"
+        android:id="@+id/box9"
         style = "@style/BoxStyle"
         android:layout_width="@dimen/base"
         android:layout_height="@dimen/double_base"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.456"
-        tools:layout_editor_absoluteX="132dp" />
+        app:layout_constraintLeft_toLeftOf="@id/game_box"
+        app:layout_constraintTop_toTopOf="@id/game_box" />
 
     <Button
-        android:id="@+id/v_box4"
-        style = "@style/BoxStyle"
+        android:id="@+id/box0"
+        style="@style/BoxStyle"
         android:layout_width="@dimen/base"
         android:layout_height="@dimen/double_base"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.454"
-        tools:layout_editor_absoluteX="72dp" />
+        app:layout_constraintLeft_toLeftOf="@id/game_box"
+        app:layout_constraintTop_toTopOf="@id/game_box" />
+
 
     <Button
         android:id="@+id/back_button"
@@ -111,6 +107,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/game_back_button"
+        android:onClick="back"
         app:layout_constraintBaseline_toBaselineOf="@+id/reset_button"
         app:layout_constraintEnd_toStartOf="@+id/reset_button"
         app:layout_constraintHorizontal_bias="0.5"
