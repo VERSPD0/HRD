@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.security.cert.TrustAnchor;
 
@@ -50,6 +51,11 @@ public class GameActivity extends AppCompatActivity {
                 {12, 1, 2}, {13, 1, 2}, {14, 1, 2}, {15, 1, 2},
                 {9, 2, 1}, {1, 2, 2}
         };
+//        int data[][] = {
+//                {0, 1, 2}, {1, 1, 2}, {2, 1, 2}, {3, 1, 1},
+//                {7, 1, 1}, {8, 1, 2}, {9, 1, 1}, {10, 2, 1},
+//                {16, 1, 1}, {14, 2, 2}
+//        };
         for(int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
                 gameBoard[i][j] = 0;
@@ -129,7 +135,7 @@ public class GameActivity extends AppCompatActivity {
                             layout.leftMargin += xD;
                             layout.topMargin += yD;
                             v.setLayoutParams(layout);
-
+                            victoryCheck(v);
                         }
 
                         @Override
@@ -191,6 +197,19 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 //        return true;
+    }
+
+    private void victoryCheck(View v) {
+        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams)v.getLayoutParams();
+        int row = layoutParams.topMargin / _base;
+        int column = layoutParams.leftMargin / _base;
+        int width = v.getWidth() / _base;
+        int height = v.getHeight() / _base;
+        if (row == 3 && column == 1 && width == 2 && height == 2) {
+            Toast toast = Toast.makeText(this, "过关啦！！！", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
     }
 
     void print() {
