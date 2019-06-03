@@ -239,4 +239,8 @@ public class GameActivity extends AppCompatActivity {
             stepStack.pop().undo(this);
         stepCount.setText(Integer.toString(stepStack.size()));
     }
+
+    public void reset(View view) {
+        initData();
+    }
 }
