@@ -10,14 +10,18 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.security.cert.TrustAnchor;
+import java.util.Stack;
+
 
 public class GameActivity extends AppCompatActivity {
     static final String GAMEID = "game.id";
     private int _base, _width, _height;
     private int gameBoard[][];
+    private Stack<Step> stepStack;
+    private TextView stepCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,9 @@ public class GameActivity extends AppCompatActivity {
 
     private void initData() {
         gameBoard = new int[5][4];
+        stepStack = new Stack<>();
+        stepCount = findViewById(R.id.stepCount);
+        stepCount.setText(Integer.toString(0));
         int boxID[] = {
                 R.id.box0,
                 R.id.box1,
@@ -123,6 +130,8 @@ public class GameActivity extends AppCompatActivity {
 
                 private void wipeTo(final View v, int x, final int xD, int y, final int yD) {
                     if (!canMove(v, xD, yD)) return;
+                    final ConstraintLayout.LayoutParams layout = (ConstraintLayout.LayoutParams)v.getLayoutParams();
+                    record(v, xD, yD);
                     Animation animation = new TranslateAnimation(x, xD, y, yD);
                     animation.setDuration(200);
                     animation.setAnimationListener(new Animation.AnimationListener() {
@@ -131,7 +140,6 @@ public class GameActivity extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation animation) {
-                            ConstraintLayout.LayoutParams layout = (ConstraintLayout.LayoutParams)v.getLayoutParams();
                             layout.leftMargin += xD;
                             layout.topMargin += yD;
                             v.setLayoutParams(layout);
@@ -212,6 +220,11 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    private void record(View v, int deltaLeft, int deltaTop) {
+        stepStack.push(new Step(v.getId(), deltaLeft, deltaTop));
+        stepCount.setText(Integer.toString(stepStack.size()));
+    }
+
     void print() {
         for(int[] l:gameBoard) {
             String line = "";
@@ -219,5 +232,11 @@ public class GameActivity extends AppCompatActivity {
                 line += Integer.toString(l[i]) + " ";
             Log.d("game bord", line);
         }
+    }
+
+    public void undo(View view) {
+        if (!stepStack.empty())
+            stepStack.pop().undo(this);
+        stepCount.setText(Integer.toString(stepStack.size()));
     }
 }
