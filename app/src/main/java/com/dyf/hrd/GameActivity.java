@@ -16,6 +16,7 @@ import java.security.cert.TrustAnchor;
 public class GameActivity extends AppCompatActivity {
     static final String GAMEID = "game.id";
     private int _base, _width, _height;
+    private int gameBoard[][];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,11 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String game_id = intent.getStringExtra(GAMEID);
         Log.d(GAMEID, game_id);
+        initData();
+    }
+
+    private void initData() {
+        gameBoard = new int[5][4];
         int boxID[] = {
                 R.id.box0,
                 R.id.box1,
@@ -44,10 +50,21 @@ public class GameActivity extends AppCompatActivity {
                 {12, 1, 2}, {13, 1, 2}, {14, 1, 2}, {15, 1, 2},
                 {9, 2, 1}, {1, 2, 2}
         };
+        for(int i = 0; i < 5; i++) {
+            for (int j = 0; j < 4; j++) {
+                gameBoard[i][j] = 0;
+            }
+        }
         for(int i = 0; i < 10; i++) {
             int block[] = data[i];
             int row = block[0] / 4;
             int column = block[0] % 4;
+            gameBoard[row][column] = 1;
+            int width = block[2] - 1;
+            int height = block[1] - 1;
+            gameBoard[row + width][column + height] = 1;
+            gameBoard[row + width][column] = 1;
+            gameBoard[row][column + height] = 1;
             Button button = findViewById(boxID[i]);
             ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(button.getLayoutParams());
             params.topMargin = row * _base;
@@ -99,6 +116,7 @@ public class GameActivity extends AppCompatActivity {
                 }
 
                 private void wipeTo(final View v, int x, final int xD, int y, final int yD) {
+                    if (!canMove(v, xD, yD)) return;
                     Animation animation = new TranslateAnimation(x, xD, y, yD);
                     animation.setDuration(200);
                     animation.setAnimationListener(new Animation.AnimationListener() {
@@ -124,4 +142,63 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    private boolean canMove(View v, int x, int y) {
+        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams)v.getLayoutParams();
+        int width = v.getWidth() / _base;
+        int height = v.getHeight() / _base;
+        int left = layoutParams.leftMargin / _base;
+        int top = layoutParams.topMargin / _base;
+        int delta;
+        if (x != 0) {
+            if (x < 0)
+                delta = -1;
+            else
+                delta = width;
+            try {
+                if (gameBoard[top][left + delta] == 0 && gameBoard[top + height - 1][left + delta] == 0) {
+                    if (x < 0) {
+                        gameBoard[top][left + width - 1] = gameBoard[top + height - 1][left + width - 1] = 0;
+                        gameBoard[top][left - 1] = gameBoard[top + height - 1][left - 1] = 1;
+                    } else {
+                        gameBoard[top][left] = gameBoard[top + height - 1][left] = 0;
+                        gameBoard[top][left + width] = gameBoard[top + height - 1][left + width] = 1;
+                    }
+                    return true;
+                } else
+                    return false;
+            } catch (Exception e) {
+                return false;
+            }
+        } else {
+            if (y < 0)
+                delta = -1;
+            else
+                delta = height;
+            try {
+                if (gameBoard[top + delta][left] == 0 && gameBoard[top + delta][left + width - 1] == 0) {
+                    if (y < 0) {
+                        gameBoard[top + height - 1][left] = gameBoard[top + height - 1][left + width - 1] = 0;
+                        gameBoard[top -1][left] = gameBoard[top -1][left + width - 1] = 1;
+                    } else {
+                        gameBoard[top][left] = gameBoard[top][left + width - 1] = 0;
+                        gameBoard[top + height][left] = gameBoard[top + height][left + width - 1] = 1;
+                    }
+                    return true;
+                } else
+                    return false;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+//        return true;
+    }
+
+    void print() {
+        for(int[] l:gameBoard) {
+            String line = "";
+            for (int i = 0; i < 4; i++)
+                line += Integer.toString(l[i]) + " ";
+            Log.d("game bord", line);
+        }
+    }
 }
