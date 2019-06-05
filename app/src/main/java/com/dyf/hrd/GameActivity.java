@@ -1,6 +1,9 @@
 package com.dyf.hrd;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.constraint.ConstraintLayout;
 import android.os.Bundle;
@@ -13,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
 import java.util.Stack;
 
 
@@ -20,6 +24,7 @@ public class GameActivity extends AppCompatActivity {
     static final String GAMEID = "game.id";
     private int _base, _width, _height;
     private int gameBoard[][];
+    private int data[][];
     private Stack<Step> stepStack;
     private TextView stepCount;
 
@@ -30,6 +35,8 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String game_id = intent.getStringExtra(GAMEID);
         Log.d(GAMEID, game_id);
+        LevelViewModel lvm = ViewModelProviders.of(this).get(LevelViewModel.class);
+        data = lvm.getData(Integer.valueOf(game_id));
         initData();
     }
 
@@ -53,11 +60,11 @@ public class GameActivity extends AppCompatActivity {
         _width = (int)getResources().getDimension(R.dimen.box_width);
         _height = (int)getResources().getDimension(R.dimen.box_height);
         _base = _width / 4;
-        int data[][] = {
-                {0, 1, 1}, {3, 1, 1}, {4, 1, 1}, {7, 1, 1},
-                {12, 1, 2}, {13, 1, 2}, {14, 1, 2}, {15, 1, 2},
-                {9, 2, 1}, {1, 2, 2}
-        };
+//        int data[][] = {
+//                {0, 1, 1}, {3, 1, 1}, {4, 1, 1}, {7, 1, 1},
+//                {12, 1, 2}, {13, 1, 2}, {14, 1, 2}, {15, 1, 2},
+//                {9, 2, 1}, {1, 2, 2}
+//        };
 //        int data[][] = {
 //                {0, 1, 2}, {1, 1, 2}, {2, 1, 2}, {3, 1, 1},
 //                {7, 1, 1}, {8, 1, 2}, {9, 1, 1}, {10, 2, 1},
