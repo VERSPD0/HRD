@@ -22,8 +22,8 @@ import java.util.Stack;
 
 public class GameActivity extends AppCompatActivity {
     static final String GAMEID = "game.id";
-    private int _base, _width, _height;
-    private int gameBoard[][];
+    public int _base, _width, _height;
+    public int gameBoard[][];
     private int data[][];
     private Stack<Step> stepStack;
     private TextView stepCount;
@@ -60,16 +60,6 @@ public class GameActivity extends AppCompatActivity {
         _width = (int)getResources().getDimension(R.dimen.box_width);
         _height = (int)getResources().getDimension(R.dimen.box_height);
         _base = _width / 4;
-//        int data[][] = {
-//                {0, 1, 1}, {3, 1, 1}, {4, 1, 1}, {7, 1, 1},
-//                {12, 1, 2}, {13, 1, 2}, {14, 1, 2}, {15, 1, 2},
-//                {9, 2, 1}, {1, 2, 2}
-//        };
-//        int data[][] = {
-//                {0, 1, 2}, {1, 1, 2}, {2, 1, 2}, {3, 1, 1},
-//                {7, 1, 1}, {8, 1, 2}, {9, 1, 1}, {10, 2, 1},
-//                {16, 1, 1}, {14, 2, 2}
-//        };
         for(int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
                 gameBoard[i][j] = 0;
@@ -242,8 +232,11 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void undo(View view) {
-        if (!stepStack.empty())
-            stepStack.pop().undo(this);
+        if (!stepStack.empty()) {
+            Step step = stepStack.pop();
+            step.undo(this);
+        }
+
         stepCount.setText(Integer.toString(stepStack.size()));
     }
 
