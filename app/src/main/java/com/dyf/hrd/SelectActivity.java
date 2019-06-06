@@ -26,7 +26,13 @@ public class SelectActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         levelViewModel = ViewModelProviders.of(this).get(LevelViewModel.class);
-        levelViewModel.getmAllLevels().observe(this, new Observer<List<Level>>() {
+//        levelViewModel.getmAllLevels().observe(this, new Observer<List<Level>>() {
+//            @Override
+//            public void onChanged(@Nullable List<Level> levels) {
+//                adapter.setLevels(levels);
+//            }
+//        });
+        levelViewModel.getmDIYLevels().observe(this, new Observer<List<Level>>() {
             @Override
             public void onChanged(@Nullable List<Level> levels) {
                 adapter.setLevels(levels);

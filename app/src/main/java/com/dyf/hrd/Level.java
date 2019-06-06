@@ -1,12 +1,12 @@
 package com.dyf.hrd;
 
 import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
-import java.util.Arrays;
 
 @Entity
 public class Level {
@@ -23,6 +23,12 @@ public class Level {
     @ColumnInfo(name = "step")
     private int step;
 
+    @ColumnInfo(name = "isDIY")
+    private boolean isDIY;
+
+    @ColumnInfo(name = "title")
+    private String title;
+
     static boolean flag = true;
 
     public Level(@NonNull String data) {
@@ -32,6 +38,16 @@ public class Level {
         }
         this.data = data;
         this.step = 0;
+        this.isDIY = false;
+    }
+
+    @Ignore
+    public Level(@NonNull String data, @NonNull String title) {
+        this.data = data;
+        this.title = title;
+        this.step = 0;
+        this.isDIY = true;
+        Log.d("======diy", "======diy");
 
     }
 
@@ -55,4 +71,12 @@ public class Level {
     public void setStep(int step) { this.step = step; }
 
     public void setId(int id) { this.id = id; }
+
+    public String getTitle() { return this.title; }
+
+    public boolean isDIY() { return this.isDIY; }
+
+    public void setDIY(boolean flag) { this.isDIY = flag; }
+
+    public void setTitle(String title) { this.title = title; }
 }

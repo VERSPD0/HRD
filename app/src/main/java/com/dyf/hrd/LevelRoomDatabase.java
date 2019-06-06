@@ -10,7 +10,7 @@ import android.support.annotation.NonNull;
 
 import java.util.Arrays;
 
-@Database(entities = {Level.class}, version = 1, exportSchema = false)
+@Database(entities = {Level.class}, version = 2, exportSchema = false)
 public abstract class LevelRoomDatabase extends RoomDatabase {
     public abstract LevelDao levelDao();
     private static LevelRoomDatabase INSTANCE;
