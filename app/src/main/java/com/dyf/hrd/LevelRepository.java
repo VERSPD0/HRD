@@ -10,6 +10,7 @@ import java.util.List;
 public class LevelRepository {
     private LevelDao mLevelDao;
     private LiveData<List<Level>> mAllLevels;
+    private LiveData<List<Level>> mDIYLevels;
 
     private static class insertAsyncTask extends AsyncTask<Level, Void, Void> {
 
@@ -41,12 +42,15 @@ public class LevelRepository {
     LevelRepository(Application application) {
         LevelRoomDatabase db = LevelRoomDatabase.getDatabase(application);
         mLevelDao = db.levelDao();
-        mAllLevels = mLevelDao.getAllWords();
+        mAllLevels = mLevelDao.getAllLevels();
+        mDIYLevels = mLevelDao.getDIYLevels();
     }
 
     LiveData<List<Level>> getmAllLevels() {
         return mAllLevels;
     }
+
+    LiveData<List<Level>> getmDIYLevels() { return mDIYLevels; }
 
     Level getLevel(int id) {
         try {

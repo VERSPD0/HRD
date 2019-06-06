@@ -16,8 +16,11 @@ public interface LevelDao {
     @Query("DELETE FROM Level")
     void deleteAll();
 
-    @Query("SELECT * from Level ORDER BY id ASC")
-    LiveData<List<Level>> getAllWords();
+    @Query("SELECT * from Level WHERE isDIY = 0 ORDER BY id ASC")
+    LiveData<List<Level>> getAllLevels();
+
+    @Query("SELECT * from Level WHERE isDIY = 1 ORDER BY id ASC")
+    LiveData<List<Level>> getDIYLevels();
 
     @Query("SELECT * from Level WHERE id =:id")
     Level getLevel(int id);

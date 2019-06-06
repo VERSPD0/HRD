@@ -10,6 +10,7 @@ import java.util.List;
 
 public class LevelViewModel extends AndroidViewModel {
     private LiveData<List<Level>> mAllLevels;
+    private LiveData<List<Level>> mDIYLevels;
     private LevelRepository mRepository;
 
 
@@ -17,9 +18,12 @@ public class LevelViewModel extends AndroidViewModel {
         super(application);
         mRepository = new LevelRepository(application);
         mAllLevels = mRepository.getmAllLevels();
+        mDIYLevels = mRepository.getmDIYLevels();
     }
 
     LiveData<List<Level>> getmAllLevels() { return mAllLevels; }
+
+    LiveData<List<Level>> getmDIYLevels() { return mDIYLevels; }
 
     public void insert(Level level) { mRepository.insert(level); }
 

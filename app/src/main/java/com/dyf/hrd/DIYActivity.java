@@ -1,5 +1,6 @@
 package com.dyf.hrd;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,15 +8,20 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.TextView;
 
+import java.security.spec.ECField;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DIYActivity extends AppCompatActivity {
     private List<Button> buttonList = new ArrayList<>();
     private ConstraintLayout diyPage;
     private GridLayout gridLayout;
+    private EditText gameTitle;
     private int _width, _height, _base, _gameBoardLeft, _gameBoardTop;
     private int gameBoard[][];
     private Button gameBox;
@@ -27,6 +33,8 @@ public class DIYActivity extends AppCompatActivity {
         setContentView(R.layout.activity_diy);
         diyPage = findViewById(R.id.diy_page);
         gridLayout = findViewById(R.id.gridLayout);
+        gameTitle = findViewById(R.id.level_name);
+        gameBox = findViewById(R.id.game_box);
         init();
     }
 
@@ -39,7 +47,6 @@ public class DIYActivity extends AppCompatActivity {
         };
         int[] btnNum = {4, 1, 4, 1};
         gameBoard = new int[5][4];
-        gameBox = findViewById(R.id.game_box);
 //        _gameBoardLeft = (int)gameBox.getX();
 //        _gameBoardTop = (int)gameBox.getY();
         for (int i = 0; i < 5; i++)
@@ -282,5 +289,40 @@ public class DIYActivity extends AppCompatActivity {
         int num = Integer.valueOf(sample.getText().toString()) + 1;
         sample.setText(Integer.toString(num));
         sample.setTag(num);
+    }
+
+    private void check() throws Exception {
+        if (buttonList.size() != 10)
+            throw new Exception("还有" + Integer.toString(10 - buttonList.size()) + "个没有添加哦~");
+        if (gameTitle.getText().toString() == "")
+            throw new Exception("关卡名字不能为空哦~");
+    }
+
+    public void save(View view) {
+        try {
+            check();
+            int data[][] = new int[10][3];
+            Button btn;
+            int baseLeft, baseTop;
+            baseLeft = gameBox.getLeft();
+            baseTop = gameBox.getTop();
+            for (int i = 0; i < 10; i++) {
+                btn = buttonList.get(i);
+                int left, top, width, height;
+                left = (btn.getLeft() - baseLeft) / _base;
+                top = (btn.getTop() - baseTop) / _base;
+                width = btn.getWidth() / _base;
+                height = btn.getHeight() / _base;
+                data[i][0] = left + top * 4;
+                data[i][1] = width;
+                data[i][2] = height;
+            }
+            Level level = new Level(Arrays.deepToString(data), gameTitle.getText().toString());
+            LevelViewModel levelViewModel = ViewModelProviders.of(this).get(LevelViewModel.class);
+            levelViewModel.insert(level);
+            Log.d("=========", "chenggong");
+        } catch (Exception e) {
+            // toast
+        }
     }
 }

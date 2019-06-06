@@ -30,7 +30,10 @@ public class LevelListAdapter extends RecyclerView.Adapter<LevelListAdapter.Leve
         if (mLevels != null) {
             Level current = mLevels.get(position);
             holder.itemView.setTag(Integer.toString(current.getId()));
-            holder.levelTitleView.setText("level" + Integer.toString(position + 1));
+            if (current.isDIY())
+                holder.levelTitleView.setText(current.getTitle());
+            else
+                holder.levelTitleView.setText("level" + Integer.toString(position + 1));
             if (current.resolved())
                 holder.levelStatusView.setText(Integer.toString(current.getStep()));
             else
