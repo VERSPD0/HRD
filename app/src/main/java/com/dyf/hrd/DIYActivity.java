@@ -19,6 +19,7 @@ public class DIYActivity extends AppCompatActivity {
     private int _width, _height, _base, _gameBoardLeft, _gameBoardTop;
     private int gameBoard[][];
     private Button gameBox;
+    private int[] btnID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,16 +31,17 @@ public class DIYActivity extends AppCompatActivity {
     }
 
     private void init() {
-        int[] btnID = {
-                R.id.sample_cue_box,
-                R.id.sample_horizontal_box,
+        btnID = new int[]{
                 R.id.sample_small_box,
-                R.id.sample_vertical_box
+                R.id.sample_cue_box,
+                R.id.sample_vertical_box,
+                R.id.sample_horizontal_box
         };
+        int[] btnNum = {4, 1, 4, 1};
         gameBoard = new int[5][4];
         gameBox = findViewById(R.id.game_box);
-        _gameBoardLeft = (int)gameBox.getX();
-        _gameBoardTop = (int)gameBox.getY();
+//        _gameBoardLeft = (int)gameBox.getX();
+//        _gameBoardTop = (int)gameBox.getY();
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 4; j++)
                 gameBoard[i][j] = 0;
@@ -49,6 +51,8 @@ public class DIYActivity extends AppCompatActivity {
         _base = _width / 4;
         for (int i = 0; i < btnID.length; i++) {
             Button button = findViewById(btnID[i]);
+            button.setText(Integer.toString(btnNum[i]));
+            button.setTag(btnNum[i]);
             button.setOnTouchListener(new View.OnTouchListener() {
                 int lastX, lastY;
                 Button tempButton;
@@ -56,29 +60,32 @@ public class DIYActivity extends AppCompatActivity {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     int eventType = event.getAction();
+
+                    int mWidth, mHeight, width ,height;
+                    mWidth = v.getWidth();
+                    mHeight = v.getHeight();
+                    if (mWidth == mHeight) {
+                        if (v.getId() == R.id.sample_small_box) {
+                            width = height = _base;
+                        } else {
+                            width = height = _base * 2;
+                        }
+
+                    } else {
+                        if (mHeight > mWidth) {
+                            height = 2 * _base;
+                            width = _base;
+                        } else {
+                            height = _base;
+                            width = 2 * _base;
+                        }
+                    }
+                    if (((int)v.getTag()) == 0)
+                        return true;
                     switch (eventType) {
                         case MotionEvent.ACTION_DOWN:
                             lastY = (int)event.getRawY();
                             lastX = (int)event.getRawX();
-                            int mWidth, mHeight, width ,height;
-                            mWidth = v.getWidth();
-                            mHeight = v.getHeight();
-                            if (mWidth == mHeight) {
-                                if (v.getId() == R.id.sample_small_box) {
-                                    width = height = _base;
-                                } else {
-                                    width = height = _base * 2;
-                                }
-
-                            } else {
-                                if (mHeight > mWidth) {
-                                    height = 2 * _base;
-                                    width = _base;
-                                } else {
-                                    height = _base;
-                                    width = 2 * _base;
-                                }
-                            }
                             tempButton = new Button(context);
                             ConstraintLayout.LayoutParams lp =
                                     new ConstraintLayout.LayoutParams(width, height);
@@ -88,6 +95,10 @@ public class DIYActivity extends AppCompatActivity {
                             lp.topMargin = v.getTop() + gridLayout.getTop() + (mHeight - height) / 2;
                             tempButton.setLayoutParams(lp);
                             diyPage.addView(tempButton);
+
+                            Button sample = findViewById(getSampleID(tempButton));
+                            int num = Integer.valueOf(sample.getText().toString());
+                            sample.setText(Integer.toString(--num));
                             break;
                         case MotionEvent.ACTION_MOVE:
                             int newX, newY;
@@ -111,6 +122,24 @@ public class DIYActivity extends AppCompatActivity {
                     return false;
                 }
             });
+        }
+    }
+
+    private int getSampleID(Button button) {
+        int width, height;
+        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams)button.getLayoutParams();
+        width = layoutParams.width;
+        height = layoutParams.height;
+        if (width == 2 * _base) {
+            if (height == 2 * _base)
+                return R.id.sample_cue_box;
+            else
+                return R.id.sample_horizontal_box;
+        } else {
+            if (height == 2 * _base)
+                return R.id.sample_vertical_box;
+            else
+                return R.id.sample_small_box;
         }
     }
 
@@ -231,6 +260,10 @@ public class DIYActivity extends AppCompatActivity {
         });
 
         buttonList.add(button);
+
+        Button sample = findViewById(getSampleID(button));
+        int num = (int)sample.getTag();
+        sample.setTag(--num);
     }
 
     void print() {
@@ -245,5 +278,9 @@ public class DIYActivity extends AppCompatActivity {
     private void removeButton(Button button) {
         diyPage.removeView(button);
         buttonList.remove(button);
+        Button sample = findViewById(getSampleID(button));
+        int num = Integer.valueOf(sample.getText().toString()) + 1;
+        sample.setText(Integer.toString(num));
+        sample.setTag(num);
     }
 }
