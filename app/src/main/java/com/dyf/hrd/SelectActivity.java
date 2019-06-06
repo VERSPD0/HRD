@@ -27,18 +27,6 @@ public class SelectActivity extends AppCompatActivity {
         final LevelListAdapter adapter = new LevelListAdapter(this);
         levelViewModel = ViewModelProviders.of(this).get(LevelViewModel.class);
         showList();
-//        levelViewModel.getmAllLevels().observe(this, new Observer<List<Level>>() {
-//            @Override
-//            public void onChanged(@Nullable List<Level> levels) {
-//                adapter.setLevels(levels);
-//            }
-//        });
-//        levelViewModel.getmDIYLevels().observe(this, new Observer<List<Level>>() {
-//            @Override
-//            public void onChanged(@Nullable List<Level> levels) {
-//                adapter.setLevels(levels);
-//            }
-//        });
     }
 
     private void showList() {
@@ -48,7 +36,7 @@ public class SelectActivity extends AppCompatActivity {
         if (currentMode == 0) {
             levelViewModel.getmAllLevels().observe(this, new Observer<List<Level>>() {
                 @Override
-                public void onChanged(@Nullable List<Level> levels) {
+                public void onChanged(@Nullable final List<Level> levels) {
                     adapter.setLevels(levels);
                 }
             });

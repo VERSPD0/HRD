@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.security.spec.ECField;
 import java.util.ArrayList;
@@ -294,11 +295,13 @@ public class DIYActivity extends AppCompatActivity {
     private void check() throws Exception {
         if (buttonList.size() != 10)
             throw new Exception("还有" + Integer.toString(10 - buttonList.size()) + "个没有添加哦~");
-        if (gameTitle.getText().toString() == "")
+        if (gameTitle.getText().toString() == "" || gameTitle.getText().toString().isEmpty())
             throw new Exception("关卡名字不能为空哦~");
     }
 
     public void save(View view) {
+//        Log.d("[[[[[[[[[[", Boolean.toString(gameTitle.getText().toString().isEmpty()));
+//        Log.d("content", "=" + gameTitle.getText().toString() + "=");
         try {
             check();
             int data[][] = new int[10][3];
@@ -320,9 +323,12 @@ public class DIYActivity extends AppCompatActivity {
             Level level = new Level(Arrays.deepToString(data), gameTitle.getText().toString());
             LevelViewModel levelViewModel = ViewModelProviders.of(this).get(LevelViewModel.class);
             levelViewModel.insert(level);
-            Log.d("=========", "chenggong");
+            Toast toast = Toast.makeText(this, "保存成功!", Toast.LENGTH_SHORT);
+            toast.show();
+            finish();
         } catch (Exception e) {
-            // toast
+            Toast toast = Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 }

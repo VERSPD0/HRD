@@ -63,10 +63,12 @@ public abstract class LevelRoomDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(final Void... params) {
-            mDao.deleteAll();
-            for (int i = 0; i < data.length; i++) {
-                Level level = new Level(Arrays.deepToString(data[i]));
-                mDao.insert(level);
+//            mDao.deleteAll();
+            if (mDao.getAnyLevel().length < 1) {
+                for (int i = 0; i < data.length; i++) {
+                    Level level = new Level(Arrays.deepToString(data[i]));
+                    mDao.insert(level);
+                }
             }
             return null;
         }
