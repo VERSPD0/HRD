@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DIYActivity">
+    tools:context=".DIYActivity"
+    android:id="@+id/diy_page">
 
     <Button
         android:id="@+id/game_box"
         android:layout_width="@dimen/box_width"
         android:layout_height="@dimen/box_height"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="184dp"
         android:background="#aa0000"
         android:clickable="false"
@@ -61,7 +60,7 @@
     </GridLayout>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/level_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -69,6 +68,7 @@
         android:ems="10"
         android:hint="@string/level_name_hint"
         android:inputType="text"
+        android:text=""
         app:layout_constraintBottom_toTopOf="@+id/game_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,6 +83,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/save_button_text"
+        android:onClick="save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

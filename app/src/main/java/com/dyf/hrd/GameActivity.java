@@ -1,6 +1,9 @@
 package com.dyf.hrd;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.constraint.ConstraintLayout;
 import android.os.Bundle;
@@ -13,15 +16,19 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
 import java.util.Stack;
 
 
 public class GameActivity extends AppCompatActivity {
     static final String GAMEID = "game.id";
-    private int _base, _width, _height;
-    private int gameBoard[][];
+    public int _base, _width, _height;
+    public int gameBoard[][];
+    private int data[][];
+    private int levelID;
     private Stack<Step> stepStack;
     private TextView stepCount;
+    private LevelViewModel levelViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +36,9 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         Intent intent = getIntent();
         String game_id = intent.getStringExtra(GAMEID);
-        Log.d(GAMEID, game_id);
+        levelViewModel = ViewModelProviders.of(this).get(LevelViewModel.class);
+        levelID = Integer.valueOf(game_id);
+        data = levelViewModel.getData(levelID);
         initData();
     }
 
@@ -53,16 +62,6 @@ public class GameActivity extends AppCompatActivity {
         _width = (int)getResources().getDimension(R.dimen.box_width);
         _height = (int)getResources().getDimension(R.dimen.box_height);
         _base = _width / 4;
-        int data[][] = {
-                {0, 1, 1}, {3, 1, 1}, {4, 1, 1}, {7, 1, 1},
-                {12, 1, 2}, {13, 1, 2}, {14, 1, 2}, {15, 1, 2},
-                {9, 2, 1}, {1, 2, 2}
-        };
-//        int data[][] = {
-//                {0, 1, 2}, {1, 1, 2}, {2, 1, 2}, {3, 1, 1},
-//                {7, 1, 1}, {8, 1, 2}, {9, 1, 1}, {10, 2, 1},
-//                {16, 1, 1}, {14, 2, 2}
-//        };
         for(int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
                 gameBoard[i][j] = 0;
@@ -214,6 +213,8 @@ public class GameActivity extends AppCompatActivity {
         int width = v.getWidth() / _base;
         int height = v.getHeight() / _base;
         if (row == 3 && column == 1 && width == 2 && height == 2) {
+            String step = stepCount.getText().toString();
+            levelViewModel.updateStep(levelID, Integer.valueOf(step));
             Toast toast = Toast.makeText(this, "过关啦！！！", Toast.LENGTH_SHORT);
             toast.show();
         }
@@ -235,8 +236,11 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void undo(View view) {
-        if (!stepStack.empty())
-            stepStack.pop().undo(this);
+        if (!stepStack.empty()) {
+            Step step = stepStack.pop();
+            step.undo(this);
+        }
+
         stepCount.setText(Integer.toString(stepStack.size()));
     }
 
