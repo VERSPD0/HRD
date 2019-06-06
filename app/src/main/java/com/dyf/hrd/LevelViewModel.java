@@ -27,6 +27,12 @@ public class LevelViewModel extends AndroidViewModel {
 
     public void insert(Level level) { mRepository.insert(level); }
 
+    public void updateStep(int id, int step) {
+        int _step = mRepository.getLevel(id).getStep();
+        if (_step == 0 || (_step != 0 && step < _step))
+            mRepository.updateStep(id, step);
+    }
+
     public int[][] getData(int id) {
         Level level = mRepository.getLevel(id);
         return string2Array(level.getData());

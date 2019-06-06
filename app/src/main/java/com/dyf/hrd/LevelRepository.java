@@ -39,6 +39,18 @@ public class LevelRepository {
         }
     }
 
+    private static class updateAsyncTask extends AsyncTask<Integer, Void, Void> {
+        private LevelDao mAsyncTaskDao;
+
+        updateAsyncTask(LevelDao dao) { mAsyncTaskDao = dao; }
+
+        @Override
+        protected Void doInBackground(final Integer... params) {
+            mAsyncTaskDao.updateStep(params[0], params[1]);
+            return null;
+        }
+    }
+
     LevelRepository(Application application) {
         LevelRoomDatabase db = LevelRoomDatabase.getDatabase(application);
         mLevelDao = db.levelDao();
@@ -62,5 +74,9 @@ public class LevelRepository {
 
     public void insert (Level level) {
         new insertAsyncTask(mLevelDao).execute(level);
+    }
+
+    public void updateStep(int id, int step) {
+        new updateAsyncTask(mLevelDao).execute(id, step);
     }
 }
