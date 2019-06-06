@@ -27,4 +27,7 @@ public interface LevelDao {
 
     @Query("UPDATE Level SET step = :step where id = :id")
     void updateStep(int id, int step);
+
+    @Query("SELECT * from Level LIMIT 1")
+    Level[] getAnyLevel();
 }
