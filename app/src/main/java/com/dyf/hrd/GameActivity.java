@@ -25,8 +25,10 @@ public class GameActivity extends AppCompatActivity {
     public int _base, _width, _height;
     public int gameBoard[][];
     private int data[][];
+    private int levelID;
     private Stack<Step> stepStack;
     private TextView stepCount;
+    private LevelViewModel levelViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +36,9 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         Intent intent = getIntent();
         String game_id = intent.getStringExtra(GAMEID);
-        Log.d(GAMEID, game_id);
-        LevelViewModel lvm = ViewModelProviders.of(this).get(LevelViewModel.class);
-        data = lvm.getData(Integer.valueOf(game_id));
+        levelViewModel = ViewModelProviders.of(this).get(LevelViewModel.class);
+        levelID = Integer.valueOf(game_id);
+        data = levelViewModel.getData(levelID);
         initData();
     }
 
@@ -211,6 +213,8 @@ public class GameActivity extends AppCompatActivity {
         int width = v.getWidth() / _base;
         int height = v.getHeight() / _base;
         if (row == 3 && column == 1 && width == 2 && height == 2) {
+            String step = stepCount.getText().toString();
+            levelViewModel.updateStep(levelID, Integer.valueOf(step));
             Toast toast = Toast.makeText(this, "过关啦！！！", Toast.LENGTH_SHORT);
             toast.show();
         }
