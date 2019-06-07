@@ -16,8 +16,15 @@ import java.util.List;
 public class LevelListAdapter extends RecyclerView.Adapter<LevelListAdapter.LevelViewHolder> {
     private final LayoutInflater mInflater;
     private List<Level> mLevels; // Cached copy of words
+    static int oddColor, evenColor, resolvedColor, unresolvedColor;
 
-    LevelListAdapter(Context context) { mInflater = LayoutInflater.from(context); }
+    LevelListAdapter(Context context) {
+        mInflater = LayoutInflater.from(context);
+        oddColor = context.getResources().getColor(R.color.oddColor);
+        evenColor = context.getResources().getColor(R.color.evenColor);
+        resolvedColor = context.getResources().getColor(R.color.resolvedColor);
+        unresolvedColor = context.getResources().getColor(R.color.unresolvedColor);
+    }
 
     @Override
     public LevelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -30,14 +37,19 @@ public class LevelListAdapter extends RecyclerView.Adapter<LevelListAdapter.Leve
         if (mLevels != null) {
             Level current = mLevels.get(position);
             holder.itemView.setTag(Integer.toString(current.getId()));
+            holder.itemView.setBackgroundColor(position % 2 == 0 ? evenColor : oddColor);
             if (current.isDIY())
-                holder.levelTitleView.setText(current.getTitle());
+                holder.levelTitleView.setText("  " + current.getTitle());
             else
-                holder.levelTitleView.setText("level" + Integer.toString(position + 1));
-            if (current.resolved())
+                holder.levelTitleView.setText("  Level" + Integer.toString(position + 1));
+            if (current.resolved()) {
                 holder.levelStatusView.setText(Integer.toString(current.getStep()));
-            else
-                holder.levelStatusView.setText("未解决");
+                holder.levelStatusView.setTextColor(resolvedColor);
+            }
+            else {
+                holder.levelStatusView.setText("  未解决");
+                holder.levelStatusView.setTextColor(unresolvedColor);
+            }
         }
     }
 

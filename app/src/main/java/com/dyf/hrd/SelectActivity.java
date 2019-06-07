@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class SelectActivity extends AppCompatActivity {
     private LevelViewModel levelViewModel;
     private int currentMode;
     private RecyclerView recyclerView;
+    private Button BuiltInButton, DIYButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,8 @@ public class SelectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select);
         this.currentMode = 0;
         recyclerView = findViewById(R.id.recyclerview);
-        final LevelListAdapter adapter = new LevelListAdapter(this);
+        BuiltInButton = findViewById(R.id.select_built_in_game_tag);
+        DIYButton = findViewById(R.id.select_diy_game_tag);
         levelViewModel = ViewModelProviders.of(this).get(LevelViewModel.class);
         showList();
     }
@@ -34,6 +37,8 @@ public class SelectActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         if (currentMode == 0) {
+            BuiltInButton.setBackgroundColor(getResources().getColor(R.color.selected));
+            DIYButton.setBackgroundColor(getResources().getColor(R.color.unSelected));
             levelViewModel.getmAllLevels().observe(this, new Observer<List<Level>>() {
                 @Override
                 public void onChanged(@Nullable final List<Level> levels) {
@@ -41,6 +46,8 @@ public class SelectActivity extends AppCompatActivity {
                 }
             });
         } else {
+            BuiltInButton.setBackgroundColor(getResources().getColor(R.color.unSelected));
+            DIYButton.setBackgroundColor(getResources().getColor(R.color.selected));
             levelViewModel.getmDIYLevels().observe(this, new Observer<List<Level>>() {
                 @Override
                 public void onChanged(@Nullable List<Level> levels) {

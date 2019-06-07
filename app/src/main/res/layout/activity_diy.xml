@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/home_background"
     tools:context=".DIYActivity"
     android:id="@+id/diy_page">
 
@@ -12,7 +13,7 @@
         android:layout_width="@dimen/box_width"
         android:layout_height="@dimen/box_height"
         android:layout_marginBottom="184dp"
-        android:background="#aa0000"
+        android:background="@color/game_background"
         android:clickable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,6 +34,8 @@
             android:id="@+id/sample_small_box"
             android:layout_width="45dp"
             android:layout_height="45dp"
+            android:background="#FFFFFF"
+            android:layout_margin="2dp"
             android:layout_row="0"
             android:layout_column="0" />
 
@@ -41,21 +44,27 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_row="0"
-            android:layout_column="1" />
+            android:layout_column="1"
+            android:background="#FFFFFF"
+            android:layout_margin="2dp" />
 
         <Button
             android:id="@+id/sample_vertical_box"
             android:layout_width="35dp"
             android:layout_height="70dp"
             android:layout_row="0"
-            android:layout_column="2" />
+            android:layout_column="2"
+            android:background="#FFFFFF"
+            android:layout_margin="2dp" />
 
         <Button
             android:id="@+id/sample_horizontal_box"
             android:layout_width="70dp"
             android:layout_height="35dp"
             android:layout_row="0"
-            android:layout_column="3" />
+            android:layout_column="3"
+            android:background="#FFFFFF"
+            android:layout_margin="2dp" />
 
     </GridLayout>
 
@@ -64,11 +73,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="@string/level_name_hint"
+        android:backgroundTint="@color/underline_color"
         android:inputType="text"
         android:text=""
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/game_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,9 +91,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/save_button_text"
+        android:background="@color/save_button"
         android:onClick="save"
+        android:text="@string/save_button_text"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

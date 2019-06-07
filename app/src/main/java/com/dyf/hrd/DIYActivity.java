@@ -68,7 +68,7 @@ public class DIYActivity extends AppCompatActivity {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     int eventType = event.getAction();
-
+                    boolean isCue = false;
                     int mWidth, mHeight, width ,height;
                     mWidth = v.getWidth();
                     mHeight = v.getHeight();
@@ -77,6 +77,7 @@ public class DIYActivity extends AppCompatActivity {
                             width = height = _base;
                         } else {
                             width = height = _base * 2;
+                            isCue = true;
                         }
 
                     } else {
@@ -103,7 +104,10 @@ public class DIYActivity extends AppCompatActivity {
                             lp.topMargin = v.getTop() + gridLayout.getTop() + (mHeight - height) / 2;
                             tempButton.setLayoutParams(lp);
                             diyPage.addView(tempButton);
-
+                            if (isCue)
+                                tempButton.setBackground(getResources().getDrawable(R.drawable.cue_style));
+                            else
+                                tempButton.setBackground(getResources().getDrawable(R.drawable.box_style));
                             Button sample = findViewById(getSampleID(tempButton));
                             int num = Integer.valueOf(sample.getText().toString());
                             sample.setText(Integer.toString(--num));

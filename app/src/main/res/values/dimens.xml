@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="homepage_button_margin">10dp</dimen>
-    <dimen name="homepage_button_text_size">20sp</dimen>
+    <dimen name="homepage_button_text_size">24sp</dimen>
     <dimen name="base">60dp</dimen>
     <dimen name="double_base">120dp</dimen>
-    <dimen name="box_width">240dp</dimen>
-    <dimen name="box_height">300dp</dimen>
+    <dimen name="box_width">320dp</dimen>
+    <dimen name="box_height">400dp</dimen>
 </resources>

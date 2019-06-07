@@ -78,6 +78,9 @@ public class GameActivity extends AppCompatActivity {
             gameBoard[row + width][column] = 1;
             gameBoard[row][column + height] = 1;
             Button button = findViewById(boxID[i]);
+            if (width == height && width == 1) {
+                button.setBackground(getResources().getDrawable(R.drawable.cue_style));
+            }
             ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(button.getLayoutParams());
             params.topMargin = row * _base;
             params.leftMargin = column * _base;
@@ -217,8 +220,8 @@ public class GameActivity extends AppCompatActivity {
             levelViewModel.updateStep(levelID, Integer.valueOf(step));
             Toast toast = Toast.makeText(this, "过关啦！！！", Toast.LENGTH_SHORT);
             toast.show();
+            finish();
         }
-
     }
 
     private void record(View v, int deltaLeft, int deltaTop) {

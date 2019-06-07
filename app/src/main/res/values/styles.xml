@@ -3,13 +3,15 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">#435056</item>
+        <item name="colorPrimaryDark">#435056</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="BoxStyle">
         <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/box_style</item>
+        <item name="android:padding">20dp</item>
     </style>
 
 </resources>
