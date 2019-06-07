@@ -10,8 +10,8 @@
 
     <Button
         android:id="@+id/game_box"
-        android:layout_width="@dimen/box_width"
-        android:layout_height="@dimen/box_height"
+        android:layout_width="@dimen/diy_box_width"
+        android:layout_height="@dimen/diy_box_height"
         android:layout_marginBottom="184dp"
         android:background="@color/game_background"
         android:clickable="false"
