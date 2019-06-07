@@ -6,4 +6,6 @@
     <dimen name="double_base">120dp</dimen>
     <dimen name="box_width">320dp</dimen>
     <dimen name="box_height">400dp</dimen>
+    <dimen name="diy_box_width">240dp</dimen>
+    <dimen name="diy_box_height">300dp</dimen>
 </resources>
