@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="cueBoxColor">#FF00EF7E</color>
+    <color name="selected">#FF00EF7E</color>
+    <color name="unSelected">#FF181E23</color>
+    <color name="evenColor">#FF5B6F74</color>
+    <color name="oddColor">#FF21272D</color>
+    <color name="resolvedColor">#FF00EF7E</color>
+    <color name="unresolvedColor">#FFFFFFFF</color>
+    <color name="game_background">#28282c</color>
+    <color name="save_button">#FF00EF7E</color>
+    <color name="underline_color">#FF00EF7E</color>
 </resources>

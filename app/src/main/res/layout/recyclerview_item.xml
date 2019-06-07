@@ -2,15 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
     android:orientation="horizontal"
     android:onClick="selectGame"
-    android:tag="">
+    android:tag=""
+    android:id="@+id/level_line">
 
     <TextView
         android:id="@+id/level_position"
         android:layout_width="5dp"
         android:layout_height="match_parent"
         android:text=""
+        android:textColor="#FFFFFF"
         android:visibility="invisible"/>
 
     <TextView
@@ -19,7 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="16"
         android:textSize="22sp"
-        android:text="关卡1" />
+        android:text=""
+        android:textColor="#FFFFFF"/>
 
     <TextView
         android:id="@+id/level_status"
@@ -28,7 +32,7 @@
         android:layout_weight="1"
         android:gravity="right"
         android:textSize="22sp"
-        android:text="未解决"
+        android:text=""
         android:textAlignment="textStart" />
 
 

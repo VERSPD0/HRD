@@ -6,8 +6,8 @@
     <string name="setting_button_text">设置</string>
     <string name="built_in_game_tag">内置关卡</string>
     <string name="diy_game_tag">自定义关卡</string>
-    <string name="game_undo_button">undo</string>
-    <string name="game_reset_button">Reset</string>
+    <string name="game_undo_button">退后</string>
+    <string name="game_reset_button">重置</string>
     <string name="level_name_hint">请输入关卡名称</string>
     <string name="save_button_text">保存</string>
 </resources>
