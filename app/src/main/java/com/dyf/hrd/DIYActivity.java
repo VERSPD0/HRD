@@ -1,10 +1,12 @@
 package com.dyf.hrd;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.graphics.Point;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +41,26 @@ public class DIYActivity extends AppCompatActivity {
         init();
     }
 
+    private void initSize() {
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        _height = (int)((600 / 1184.0) * size.y);
+        _width = (int)(0.8 * _height);
+        _base = _width / 4;
+        int bottom = (int)((368.0 / 1184) * size.y);
+        Button gameBox = findViewById(R.id.game_box);
+        ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams)gameBox.getLayoutParams();
+        lp.bottomMargin = bottom;
+        lp.width = _width;
+        lp.height = _height;
+        gameBox.setLayoutParams(lp);
+        Button save = findViewById(R.id.save_diy_button);
+        lp = (ConstraintLayout.LayoutParams)save.getLayoutParams();
+        lp.width = (int)(300.0 / 768 * size.x);
+        save.setLayoutParams(lp);
+    }
+
     private void init() {
         btnID = new int[]{
                 R.id.sample_small_box,
@@ -47,18 +69,22 @@ public class DIYActivity extends AppCompatActivity {
                 R.id.sample_horizontal_box
         };
         int[] btnNum = {4, 1, 4, 1};
+        int[][] btnSize = {{90, 90}, {140, 140}, {70, 140}, {140, 70}};
+        initSize();
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
         gameBoard = new int[5][4];
-//        _gameBoardLeft = (int)gameBox.getX();
-//        _gameBoardTop = (int)gameBox.getY();
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 4; j++)
                 gameBoard[i][j] = 0;
         final DIYActivity context = this;
-        _width = (int)getResources().getDimension(R.dimen.box_width);
-        _height = (int)getResources().getDimension(R.dimen.box_height);
-        _base = _width / 4;
         for (int i = 0; i < btnID.length; i++) {
             Button button = findViewById(btnID[i]);
+            GridLayout.LayoutParams lp = (GridLayout.LayoutParams)button.getLayoutParams();
+            lp.width = (int)(btnSize[i][0] / 768.0 * size.x);
+            lp.height = (int)(btnSize[i][1] / 768.0 * size.x);
+            button.setLayoutParams(lp);
             button.setText(Integer.toString(btnNum[i]));
             button.setTag(btnNum[i]);
             button.setOnTouchListener(new View.OnTouchListener() {

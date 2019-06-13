@@ -3,11 +3,13 @@ package com.dyf.hrd;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.Point;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.constraint.ConstraintLayout;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -42,6 +44,22 @@ public class GameActivity extends AppCompatActivity {
         initData();
     }
 
+    private void initGameBox() {
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        _height = (int)((800 / 1184.0) * size.y);
+        _width = (int)(0.8 * _height);
+        _base = _width / 4;
+        int bottom = (int)((168.0 / 1184) * size.y);
+        Button gameBox = findViewById(R.id.game_box);
+        ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams)gameBox.getLayoutParams();
+        lp.bottomMargin = bottom;
+        lp.width = _width;
+        lp.height = _height;
+        gameBox.setLayoutParams(lp);
+    }
+
     private void initData() {
         gameBoard = new int[5][4];
         stepStack = new Stack<>();
@@ -59,9 +77,7 @@ public class GameActivity extends AppCompatActivity {
                 R.id.box8,
                 R.id.box9,
         };
-        _width = (int)getResources().getDimension(R.dimen.box_width);
-        _height = (int)getResources().getDimension(R.dimen.box_height);
-        _base = _width / 4;
+        initGameBox();
         for(int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
                 gameBoard[i][j] = 0;
@@ -135,7 +151,7 @@ public class GameActivity extends AppCompatActivity {
                     final ConstraintLayout.LayoutParams layout = (ConstraintLayout.LayoutParams)v.getLayoutParams();
                     record(v, xD, yD);
                     Animation animation = new TranslateAnimation(x, xD, y, yD);
-                    animation.setDuration(200);
+                    animation.setDuration(50);
                     animation.setAnimationListener(new Animation.AnimationListener() {
                         @Override
                         public void onAnimationStart(Animation animation) {}
