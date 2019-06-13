@@ -26,7 +26,7 @@ public class Step {
         left = layout.leftMargin / base;
         top = layout.topMargin / base;
         Animation animation = new TranslateAnimation(0, -deltaLeft, 0, -deltaTop);
-        animation.setDuration(200);
+        animation.setDuration(1);
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {}

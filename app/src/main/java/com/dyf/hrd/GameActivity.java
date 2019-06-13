@@ -254,12 +254,11 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    public void undo(View view) {
+    public synchronized void undo(View view) {
         if (!stepStack.empty()) {
             Step step = stepStack.pop();
             step.undo(this);
         }
-
         stepCount.setText(Integer.toString(stepStack.size()));
     }
 
